@@ -520,7 +520,8 @@ MC 통신 코드의 단위시험 10개가 모두 통과했으며, 검사 상태�
 
 PLC 제어 흐름에 따라 협동로봇이 소재 공급 위치에서 웨이퍼를 공급하는 동작입니다.
 
-[HCRMV1.mp4](영상_URL_1)
+[HCRMV1.mp4](https://github.com/user-attachments/assets/b0cc1a96-6140-4b22-b87f-2b2fc4e35ea5)
+
 
 </details>
 
@@ -529,7 +530,7 @@ PLC 제어 흐름에 따라 협동로봇이 소재 공급 위치에서 웨이퍼
 
 OpenCV 비전 검사 결과 결함 개수가 정상 기준(0~3개)에 해당하는지 확인하는 과정입니다.
 
-[HCRMV2.mp4](영상_URL_2)
+[HCRMV2.mp4](https://github.com/user-attachments/assets/e9c50893-2df4-4247-b830-d203b3cd86bb)
 
 </details>
 
@@ -538,7 +539,8 @@ OpenCV 비전 검사 결과 결함 개수가 정상 기준(0~3개)에 해당하�
 
 정상 판정된 웨이퍼가 컨베이어를 통해 스토퍼 위치로 이동하고, PLC 출력 및 Relay Digital I/O를 통해 협동로봇에 적재 작업을 요청하는 과정입니다.
 
-[HCRMV3.mp4](영상_URL_3)
+[HCRMV3.mp4](https://github.com/user-attachments/assets/0d5e9df6-27b4-41bd-a3f9-6ad036b10cbe
+)
 
 </details>
 
@@ -549,7 +551,8 @@ OpenCV 비전 검사 결과 결함 개수가 정상 기준(0~3개)에 해당하�
 
 OpenCV 비전 검사 결과 결함 개수가 불량 기준(4~100개)에 해당하는지 확인하는 과정입니다.
 
-[HCRMV4.mp4](영상_URL_4)
+[HCRMV4.mp4](https://github.com/user-attachments/assets/ef175608-c3b8-41c1-b885-bcb8af3489ab
+)
 
 </details>
 
@@ -558,7 +561,8 @@ OpenCV 비전 검사 결과 결함 개수가 불량 기준(4~100개)에 해당�
 
 불량 판정 결과를 PLC에서 수신한 후 배출 실린더를 구동하여 불량 웨이퍼를 분리하는 과정입니다.
 
-[HCRMV5.mp4](영상_URL_5)
+[HCRMV5.mp4](https://github.com/user-attachments/assets/7daf1945-54f4-4123-94b4-0a85052c0e3e
+)
 
 </details>
 
@@ -569,9 +573,9 @@ OpenCV 비전 검사 결과 결함 개수가 불량 기준(4~100개)에 해당�
 
 PLC 작업 요청 신호에 따라 협동로봇이 정해진 순서로 동작하고, 소재 공급 및 창고 적재 작업을 수행하는 과정입니다.
 
-[HCRMV6.mp4](영상_URL_6)
+[HCRMV6.mp4](https://github.com/user-attachments/assets/78f26dce-6dc0-40c6-8510-96dced018960)
 
-
+</details>
 ---
 
 </details>
