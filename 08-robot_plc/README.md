@@ -160,7 +160,7 @@ Connected Component 분석
 서로 붙어 있거나 매우 가까운 결함은 하나로 연결되어 검출될 수 있으며, 정상 격자선에 완전히 가려진 결함은 영상만으로 구분하기 어렵다는 한계도 함께 고려했습니다.
 
 <p align="center">
-  <img src="portfolio_images/defect_detection.png" alt="정상 패턴과 추가 결함 검출 결과" width="90%">
+  <img src="프젝8이미지/HCR3.png" alt="정상 패턴과 추가 결함 검출 결과" width="90%">
 </p>
 
 ### 3-3. PLC 요청 기반 카메라 촬영 및 MC Protocol 통신
@@ -192,7 +192,7 @@ PC는 검사 상태와 결과 데이터를 먼저 기록하고 완료 번호를 
 하트비트 중단, 검사 시간 초과, 완료 번호 불일치 또는 비정상 데이터가 발생하면 오류 보류 상태로 전환해 이전 검사 결과로 설비가 동작하지 않도록 했습니다.
 
 <p align="center">
-  <img src="portfolio_images/mc_protocol_monitor.png" alt="PC-PLC MC Protocol 데이터 모니터링" width="90%">
+  <img src="프젝8이미지/HCR4-1.png" alt="PC-PLC MC Protocol 데이터 모니터링" width="90%">
 </p>
 
 ### 3-4. 결함 개수에 따른 PLC 자동 분기 시퀀스
@@ -247,7 +247,7 @@ Mitsubishi PLC는 NPN 방식, Hanwha Robotics HCR-3A는 PNP 방식으로 서로 
 - PLC 시퀀스와 로봇 작업 요청 신호 연동
 
 <p align="center">
-  <img src="portfolio_images/relay_wiring.png" alt="NPN PLC와 PNP 협동로봇 간 Relay 회로 및 실제 배선" width="90%">
+  <img src="프젝8이미지/HCR2.jpg" alt="NPN PLC와 PNP 협동로봇 간 Relay 회로 및 실제 배선" width="90%">
 </p>
 
 ### 3-6. PLC 출력 기반 협동로봇 작업 요청 및 반복 운전 시퀀스
@@ -277,7 +277,7 @@ HCR-3A 로봇 적재 작업 요청
 로봇 동작 상태 `M0`가 성립하면 `Y38`을 출력해 다음 소재 공급 단계로 이어지도록 구성했습니다.
 
 <p align="center">
-  <img src="portfolio_images/plc_robot_sequence.png" alt="PLC 로봇 작업 요청 및 적재 위치 분기 래더" width="90%">
+  <img src="프젝8이미지/HCR4-2.png" alt="PLC 로봇 작업 요청 및 적재 위치 분기 래더" width="90%">
 </p>
 
 ### 3-7. 반복 운전을 위한 초기화 및 실린더 Interlock
@@ -293,10 +293,24 @@ HCR-3A 로봇 적재 작업 요청
 
 이를 통해 검사 요청, 판정, 적재·배출, 초기화가 연결되는 반복 운전 구조를 구성했습니다.
 
-<p align="center">
-  <img src="portfolio_images/plc_interlock_ladder.png" alt="실린더 전진 후진 상호 Interlock 및 초기화 래더" width="90%">
-</p>
-
+<table align="center" style="border: none; width: 100%; text-align: center;">
+  <tr>
+    <td style="border: none; width: 50%; padding: 10px;">
+      <img src="프젝8이미지/HCR5-2.png" alt="인터락 래더" width="100%">
+    </td>
+    <td style="border: none; width: 50%; padding: 10px;">
+      <img src="프젝8이미지/HCR5-3.png" alt="초기화 래더" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none; text-align: center; font-weight: bold; padding-top: 5px;">
+      [그림] 실린더 전진/후진 인터락 래더
+    </td>
+    <td style="border: none; text-align: center; font-weight: bold; padding-top: 5px;">
+      [그림] 초기화 래더
+    </td>
+  </tr>
+</table>
 ---
 
 ## 4. 주요 트러블슈팅
