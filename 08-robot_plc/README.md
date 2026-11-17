@@ -19,7 +19,9 @@
 
 ---
 
-## 1. 프로젝트 개요
+<details>
+<summary><b>01. 프로젝트 개요</b></summary>
+
 
 격자 무늬가 인쇄된 원판형 웨이퍼를 카메라로 촬영하고, Python / OpenCV로 점·선 형태의 추가 결함을 검출한 뒤 검사 결과에 따라 정상 웨이퍼와 불량 웨이퍼를 자동 분류하는 시스템을 구현했습니다.
 
@@ -41,41 +43,31 @@
 
 ### 시스템 전체 동작 흐름
 
-```text
-① 웨이퍼 공급 및 이송
-        ↓
-② 카메라 촬영 요청 및 영상 취득
-        ↓
-③ Python / OpenCV 영상 보정 및 결함 검사
-        ↓
-④ 결함 개수 산출
-        ↓
-⑤ MC Protocol로 PLC에 검사 결과 전달
-        ↓
-⑥ PLC에서 요청 번호·완료 상태·검사 데이터 검증
-        ↓
-   ┌───────────────┴───────────────┐
-   │                               │
-정상 웨이퍼                       불량 웨이퍼
-결함 0~3개                       결함 4~100개
-   │                               │
-컨베이어 스토퍼 이송              배출 실린더 동작
-   │                               │
-PLC → Relay → HCR-3A              불량품 분리 배출
-로봇 작업 요청
-   │
-창고 적재
-   │
-다음 사이클 진행
-```
-
-<p align="center">
-  <img src="프젝8이미지/HCR1.jpg" alt="웨이퍼 검사 및 자동 분류 시스템 전체 구성" width="92%">
-</p>
+<table align="center" style="border: none; width: 100%;">
+  <tr>
+    <td style="border: none; width: 50%; padding: 5px; text-align: center;">
+      <img src="프젝8이미지/HCR0.png" alt="시스템 구성 이미지 1" width="100%">
+    </td>
+    <td style="border: none; width: 50%; padding: 5px; text-align: center;">
+      <img src="프젝8이미지/HCR1.jpg" alt="시스템 구성 이미지 2" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="border: none; text-align: center; font-weight: bold; padding-top: 10px; font-size: 15px;">
+      웨이퍼 검사 및 자동 분류 시스템 전체 구성
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 2. 사용 기술 및 장비
+</details>
+
+---
+
+<details>
+<summary><b>02. 사용 기술 및 장비</b></summary>
+
 
 | 구분 | 기술 / 장비 | 활용 내용 |
 |---|---|---|
@@ -92,9 +84,17 @@ PLC → Relay → HCR-3A              불량품 분리 배출
 
 ---
 
-## 3. 주요 구현 내용
+</details>
 
-### 3-1. OpenCV 기반 웨이퍼 위치 및 촬영 자세 보정
+---
+
+<details>
+<summary><b>03. 주요 구현 내용</b></summary>
+
+
+<details>
+<summary><b>3-1. OpenCV 기반 웨이퍼 위치 및 촬영 자세 보정</b></summary>
+
 
 카메라와 웨이퍼 사이의 거리나 촬영 각도가 달라져도 검사할 수 있도록 화면 중앙의 고정 영역만 검사하는 방식에서 벗어나 **전체 프레임에서 원판 후보를 탐색**하도록 구성했습니다.
 
@@ -127,11 +127,11 @@ Hough Line 기반 격자 각도 계산
 기준 정상 영상에 정렬
 ```
 
-<p align="center">
-  <img src="portfolio_images/vision_alignment.png" alt="웨이퍼 원판 탐색 및 영상 정합 결과" width="90%">
-</p>
+</details>
 
-### 3-2. 정상 격자를 제외한 점·선 형태 결함 검출
+<details>
+<summary><b>3-2. 정상 격자를 제외한 점·선 형태 결함 검출</b></summary>
+
 
 정상 웨이퍼 영상을 기준 이미지로 등록하고, 촬영한 검사 영상을 기준 이미지에 정합한 뒤 정상 격자에는 존재하지 않는 추가 어두운 영역을 결함 후보로 추출했습니다.
 
@@ -163,7 +163,11 @@ Connected Component 분석
   <img src="프젝8이미지/HCR3.png" alt="정상 패턴과 추가 결함 검출 결과" width="90%">
 </p>
 
-### 3-3. PLC 요청 기반 카메라 촬영 및 MC Protocol 통신
+</details>
+
+<details>
+<summary><b>3-3. PLC 요청 기반 카메라 촬영 및 MC Protocol 통신</b></summary>
+
 
 PLC가 검사 요청을 발생시키면 PC가 이를 확인하고 카메라에서 새로운 프레임을 취득해 검사하도록 구성했습니다. PLC 요청 신호가 들어오기 전에는 PC의 수동 검사 기능이 동작하지 않도록 구분했습니다.
 
@@ -195,7 +199,11 @@ PC는 검사 상태와 결과 데이터를 먼저 기록하고 완료 번호를 
   <img src="프젝8이미지/HCR4-1.png" alt="PC-PLC MC Protocol 데이터 모니터링" width="90%">
 </p>
 
-### 3-4. 결함 개수에 따른 PLC 자동 분기 시퀀스
+</details>
+
+<details>
+<summary><b>3-4. 결함 개수에 따른 PLC 자동 분기 시퀀스</b></summary>
+
 
 PLC에서 유효한 결함 개수를 확인한 뒤 정상 웨이퍼와 불량 웨이퍼의 후속 동작을 분기했습니다.
 
@@ -231,7 +239,11 @@ PLC에서 유효한 결함 개수를 확인한 뒤 정상 웨이퍼와 불량 �
 
 불량 웨이퍼는 결함 개수 기준에 따라 배출 실린더를 동작시켰습니다. 정상 웨이퍼는 스토퍼 센서가 감지될 때까지 컨베이어로 이송한 뒤 로봇 작업 요청 신호를 전달하도록 구성했습니다.
 
-### 3-5. NPN PLC와 PNP 협동로봇 간 Relay 기반 Digital I/O 직접 배선
+</details>
+
+<details>
+<summary><b>3-5. NPN PLC와 PNP 협동로봇 간 Relay 기반 Digital I/O 직접 배선</b></summary>
+
 
 Mitsubishi PLC는 NPN 방식, Hanwha Robotics HCR-3A는 PNP 방식으로 서로 다른 디지털 신호 방식을 사용했습니다. 두 장치의 출력 신호를 직접 연결하는 방식으로는 원하는 신호 연동을 구성하기 어려워 **Relay를 이용해 PLC와 로봇 사이의 Digital I/O 인터페이스를 구성하고 직접 배선**했습니다.
 
@@ -250,7 +262,11 @@ Mitsubishi PLC는 NPN 방식, Hanwha Robotics HCR-3A는 PNP 방식으로 서로 
   <img src="프젝8이미지/HCR2.jpg" alt="NPN PLC와 PNP 협동로봇 간 Relay 회로 및 실제 배선" width="90%">
 </p>
 
-### 3-6. PLC 출력 기반 협동로봇 작업 요청 및 반복 운전 시퀀스
+</details>
+
+<details>
+<summary><b>3-6. PLC 출력 기반 협동로봇 작업 요청 및 반복 운전 시퀀스</b></summary>
+
 
 로봇 내부 프로그램을 직접 작성하거나 티칭한 것이 아니라, **PLC에서 로봇의 작업 요청 신호를 생성하고 Relay Digital I/O를 통해 로봇과 연동하는 제어 흐름**을 담당했습니다. 로봇 내부 동작 프로그램 및 티칭은 팀원이 담당했습니다.
 
@@ -280,7 +296,11 @@ HCR-3A 로봇 적재 작업 요청
   <img src="프젝8이미지/HCR4-2.png" alt="PLC 로봇 작업 요청 및 적재 위치 분기 래더" width="90%">
 </p>
 
-### 3-7. 반복 운전을 위한 초기화 및 실린더 Interlock
+</details>
+
+<details>
+<summary><b>3-7. 반복 운전을 위한 초기화 및 실린더 Interlock</b></summary>
+
 
 자동 운전에서는 한 사이클에서 사용한 요청 신호나 출력 상태가 다음 사이클까지 남아 있으면 중복 동작 또는 시퀀스 정지가 발생할 수 있습니다. 이를 방지하기 위해 요청 신호의 발생·완료·초기화 조건을 구분하고, 실린더 전진·후진 출력이 동시에 성립하지 않도록 상호 Interlock을 구성했습니다.
 
@@ -313,9 +333,19 @@ HCR-3A 로봇 적재 작업 요청
 </table>
 ---
 
-## 4. 주요 트러블슈팅
+</details>
 
-### Trouble 01. 촬영 거리와 각도 변화로 웨이퍼 및 격자를 인식하지 못하는 문제
+</details>
+
+---
+
+<details>
+<summary><b>04. 주요 트러블슈팅</b></summary>
+
+
+<details>
+<summary><b>Trouble 01. 촬영 거리와 각도 변화로 웨이퍼 및 격자를 인식하지 못하는 문제</b></summary>
+
 
 **Problem**
 
@@ -338,7 +368,11 @@ HCR-3A 로봇 적재 작업 요청
 
 원판의 위치와 촬영 각도가 달라져도 외곽과 격자를 기준 영상에 맞출 수 있는 검사 구조를 구성했습니다.
 
-### Trouble 02. Modbus TCP 데이터 길이 처리 문제
+</details>
+
+<details>
+<summary><b>Trouble 02. Modbus TCP 데이터 길이 처리 문제</b></summary>
+
 
 **Problem**
 
@@ -362,7 +396,11 @@ TCP 연결 자체의 문제가 아니라 응답 프레임의 데이터 길이와
 
 MC 통신 코드의 단위시험 10개가 모두 통과했으며, 검사 상태·판정·오류·결함 개수를 PLC D 레지스터에 전달하는 구조를 완성했습니다.
 
-### Trouble 03. 검사 요청 신호가 초기화되지 않아 다음 촬영이 불가능한 문제
+</details>
+
+<details>
+<summary><b>Trouble 03. 검사 요청 신호가 초기화되지 않아 다음 촬영이 불가능한 문제</b></summary>
+
 
 **Problem**
 
@@ -384,7 +422,11 @@ MC 통신 코드의 단위시험 10개가 모두 통과했으며, 검사 상태�
 
 첫 검사 이후에도 요청 상태가 정상적으로 초기화되어 다음 웨이퍼가 독립적인 요청 번호로 촬영·검사될 수 있도록 반복 사이클을 구성했습니다.
 
-### Trouble 04. 배출 실린더 전진·후진 출력 충돌
+</details>
+
+<details>
+<summary><b>Trouble 04. 배출 실린더 전진·후진 출력 충돌</b></summary>
+
 
 **Problem**
 
@@ -406,7 +448,11 @@ MC 통신 코드의 단위시험 10개가 모두 통과했으며, 검사 상태�
 
 후진 중 재전진하는 현상을 방지하고, 한 방향 동작을 완료한 뒤에만 반대 방향으로 전환되도록 수정했습니다.
 
-### Trouble 05. 컨베이어 시작·정지 타이밍이 공정 상태와 맞지 않는 문제
+</details>
+
+<details>
+<summary><b>Trouble 05. 컨베이어 시작·정지 타이밍이 공정 상태와 맞지 않는 문제</b></summary>
+
 
 **Problem**
 
@@ -430,14 +476,22 @@ MC 통신 코드의 단위시험 10개가 모두 통과했으며, 검사 상태�
 
 ---
 
-## 5. 결과 및 핵심 성과
+</details>
+
+</details>
+
+---
+
+<details>
+<summary><b>05. 결과 및 핵심 성과</b></summary>
+
 
 - Python / OpenCV 기반 웨이퍼 위치 보정 및 결함 검사 파이프라인 구성
 - 전체 프레임 원판 탐색, 타원→원 보정, 격자 방향 및 원근 정합 적용
 - 정상 격자를 제외한 점·선 형태의 추가 어두운 연결 영역 검출 및 카운트
 - MC Protocol 3E Binary 기반 PC ↔ Mitsubishi PLC 통신 구현
 - 요청 번호·완료 번호·상태·오류·하트비트를 이용한 검사 Handshake 구성
-- 결함 0~3개 정상 웨이퍼와 4~100개 불량 웨이퍼의 자동 분기
+- 결함 개수 기준(0~3개 / 4~100개)에 따른 정상·불량 웨이퍼 자동 분기
 - 공급·가공·분배·배출 실린더 및 컨베이어 PLC 시퀀스 구성
 - NPN PLC와 PNP 협동로봇 간 Relay 회로 직접 배선 및 Digital I/O 연동
 - PLC 출력 신호를 이용한 협동로봇 작업 요청 및 적재 위치 분기
@@ -450,7 +504,83 @@ MC 통신 코드의 단위시험 10개가 모두 통과했으며, 검사 상태�
 
 ---
 
-## 6. 회고 및 배운 점
+</details>
+
+---
+
+<details>
+<summary><b>06. 자동화 시스템 동작 시연</b></summary>
+
+프로젝트에서 구현한 PLC 제어, 비전 검사, 협동로봇 및 실린더 연동 동작을 영상으로 정리했습니다.
+
+### 6-1. 소재 공급 및 정상 제품 적재
+
+<details>
+<summary><b>HCRMV1. 로봇팔 소재 공급</b></summary>
+
+PLC 제어 흐름에 따라 협동로봇이 소재 공급 위치에서 웨이퍼를 공급하는 동작입니다.
+
+[HCRMV1.mp4](영상_URL_1)
+
+</details>
+
+<details>
+<summary><b>HCRMV2. 정상 소재 검사 및 판정</b></summary>
+
+OpenCV 비전 검사 결과 결함 개수가 정상 기준(0~3개)에 해당하는지 확인하는 과정입니다.
+
+[HCRMV2.mp4](영상_URL_2)
+
+</details>
+
+<details>
+<summary><b>HCRMV3. 정상 소재 이송 및 로봇 적재</b></summary>
+
+정상 판정된 웨이퍼가 컨베이어를 통해 스토퍼 위치로 이동하고, PLC 출력 및 Relay Digital I/O를 통해 협동로봇에 적재 작업을 요청하는 과정입니다.
+
+[HCRMV3.mp4](영상_URL_3)
+
+</details>
+
+### 6-2. 불량 제품 검사 및 자동 배출
+
+<details>
+<summary><b>HCRMV4. 불량 소재 검사 및 판정</b></summary>
+
+OpenCV 비전 검사 결과 결함 개수가 불량 기준(4~100개)에 해당하는지 확인하는 과정입니다.
+
+[HCRMV4.mp4](영상_URL_4)
+
+</details>
+
+<details>
+<summary><b>HCRMV5. 불량 소재 실린더 자동 배출</b></summary>
+
+불량 판정 결과를 PLC에서 수신한 후 배출 실린더를 구동하여 불량 웨이퍼를 분리하는 과정입니다.
+
+[HCRMV5.mp4](영상_URL_5)
+
+</details>
+
+### 6-3. 협동로봇 순차 동작
+
+<details>
+<summary><b>HCRMV6. 협동로봇 순차 동작 및 창고 적재</b></summary>
+
+PLC 작업 요청 신호에 따라 협동로봇이 정해진 순서로 동작하고, 소재 공급 및 창고 적재 작업을 수행하는 과정입니다.
+
+[HCRMV6.mp4](영상_URL_6)
+
+
+---
+
+</details>
+
+---
+
+<details>
+<summary><b>07. 회고 및 배운 점</b></summary>
+
 
 이번 프로젝트를 통해 비전검사는 이미지를 분석하는 프로그램만 완성한다고 끝나는 것이 아니라, 촬영 조건을 안정화하고 검사 결과의 유효성을 판단한 뒤 PLC가 사용할 수 있는 형태로 전달해 실제 설비 동작까지 연결해야 한다는 점을 경험했습니다.
 
@@ -477,3 +607,7 @@ Cycle Reset & Next Wafer
 ```
 
 이 경험을 바탕으로 비전·통신·PLC·전기 I/O·기계 구동부를 개별 요소가 아닌 하나의 자동화 시스템으로 바라보고, 각 단계의 신호 흐름을 확인하며 문제를 해결하는 역량을 쌓았습니다.
+
+</details>
+
+---
