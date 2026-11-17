@@ -70,7 +70,7 @@ PLC → Relay → HCR-3A              불량품 분리 배출
 ```
 
 <p align="center">
-  <img src="portfolio_images/system_overview.png" alt="웨이퍼 검사 및 자동 분류 시스템 전체 구성" width="92%">
+  <img src="프젝8이미지/HCR1.png" alt="웨이퍼 검사 및 자동 분류 시스템 전체 구성" width="92%">
 </p>
 
 ---
